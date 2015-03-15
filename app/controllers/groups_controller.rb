@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
-    @tasks=@group.tasks
+    @tasks=@group.tasks.includes(:groups).order(completed: :asc, priority: :desc)
   end
 
   # GET /groups/new

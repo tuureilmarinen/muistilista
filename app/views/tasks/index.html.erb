@@ -1,63 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing My Tasks</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Completed</th>
-      <th>Priority</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.name %></td>
-        <td><%= task.description %></td>
-        <td><%= task.completed %></td>
-        <td><%= task.priority %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<h1>Listing Tasks by others</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Completed</th>
-      <th>Priority</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @all_tasks.each do |task| %>
-      <tr>
-        <td><%= task.user %></td>
-        <td><%= task.name %></td>
-        <td><%= task.description %></td>
-        <td><%= task.completed %></td>
-        <td><%= task.priority %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<hr/>
-
+<h1>My tasks</h1>
+<% if @tasks.empty? %>
+<p>You don't have any tasks at the moment. Create one by clicking the button below.</p>
+<% end %>
 <% @tasks.each do |t| %>
   <div class="panel panel-default">
     <div class="panel-heading">

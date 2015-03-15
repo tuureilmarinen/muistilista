@@ -1,5 +1,20 @@
 <%# add navigation links to this file %>
 <%#<li><%= render 'layouts/login_form' %><%#</li> %>
 <% if current_user %>
+<li role="presentation" class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+		groups <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu" role="menu">
+		<% current_user.groups.each do |g| %>
+			<li><%= link_to g.name, g %></li>
+		<% end %>
+		<% unless current_user.groups.empty? %>
+			<li role="presentation" class="divider"></li>
+		<% end %>
+		<li><%= link_to 'new group', new_group_path %></li>
+	</ul>
+</li>
 <li><%= link_to "logout #{current_user}", logout_path, method: :delete %></li>
+<li><%= link_to "change password", edit_user_path(current_user) %></li>
 <% end %>

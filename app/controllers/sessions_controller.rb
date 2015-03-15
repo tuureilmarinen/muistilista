@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by username: params[:username]
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to user_path(user), notice: "Login successful"
+      redirect_to tasks_path, notice: "Login successful"
     else
       redirect_to :back, notice: "username and/or passowrd mismatch"
     end

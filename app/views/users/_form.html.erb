@@ -11,19 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.text_field :password_confirmation %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+        <%= f.text_field :username, placeholder:"username", class:"form-control" %>
+      </div>
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+        <%= f.password_field :password, placeholder:"password", class:"form-control" %>
+      </div>
+      <div class="input-group input-group-sm">
+        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+        <%= f.password_field :password_confirmation, placeholder:"password confirmation", class:"form-control" %>
+      </div>
+      <%= submit_tag "Sign up!", class:'btn btn-ok btn-sm' %>
 <% end %>

@@ -1,52 +1,23 @@
 <p id="notice"><%= notice %></p>
 
 <h1>
-<%= @group.name %> by
-<%= @group.user.username %>
+<%= @group.name %>
 </h1>
 
 <%# copypastaa, orginal task/index.html.erb %>
 <% @tasks.each do |t| %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <% if t.completed? %>
-        <span class="glyphicon glyphicon-ok"></span>
-      <% else %>
-        <span class="glyphicon glyphicon-remove"></span>
-      <% end %>
-      <%= t.name %>
-      <span class="badge">
-      <%= t.priority %>
-      </span>
-    </div>
-    <div class="panel-body">
-    <%= t.description %>
-    </div>
-      <ul class="list-inline" style="margin-left: 10px;">
-      <% unless t.groups.empty? %>
-        <% t.groups.each do |g| %>
-          <li>
-            <%= link_to g, g, class:"btn btn-xs btn-default" %>
-          </li>
-        <% end %>
-      <% end %>
-        <li>
-          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe , edit_task_path(t), class:"btn btn-xs btn-primary" %>
-        </li>
-        <li>
-          <% if t.completed? %>
-          <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe , toggle_completion_task_path(t.id), method: :post, class:"btn btn-xs btn-danger" %>
-          <% else %>
-            <%= link_to '<span class="glyphicon glyphicon-ok"></span>'.html_safe , toggle_completion_task_path(t.id), method: :post, class:"btn btn-xs btn-success" %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, t, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-xs btn-default" %>
-        </li>
-      </ul>
-  </div>
+	<% @t=t %>
+	<%= render 'layouts/task' %>
 <% end %>
 
-
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<ul class="list-inline">
+        <li>
+        	<%= link_to '<span class="glyphicon glyphicon-arrow-left"></span> back'.html_safe, tasks_path, class:"btn btn-default btn-xs" %>
+        </li>
+        <li>
+          <%= link_to '<span class="glyphicon glyphicon-pencil"></span> edit'.html_safe , edit_group_path(@group), class:"btn btn-xs btn-default" %>
+        </li>
+        <li>
+          <%= link_to '<span class="glyphicon glyphicon-trash"></span> remove'.html_safe, @group, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-xs btn-danger" %>
+        </li>
+</ul>

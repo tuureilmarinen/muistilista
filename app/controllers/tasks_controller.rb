@@ -13,9 +13,8 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     #@tasks = Task.all
-    @tasks = current_user.tasks.includes(:groups).order(priority: :desc)
+    @tasks = current_user.tasks.includes(:groups).order(completed: :asc, priority: :desc)
 
-    @all_tasks=Task.includes(:groups).where.not(user: current_user)
   end
 
   # GET /tasks/1
