@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>
 <%= @group.name %>
 </h1>
@@ -8,6 +6,9 @@
 <% @tasks.each do |t| %>
 	<% @t=t %>
 	<%= render 'layouts/task' %>
+<% end %>
+<% if @tasks.empty? %>
+<p>No tasks in this group.</p>
 <% end %>
 
 <ul class="list-inline">
