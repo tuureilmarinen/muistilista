@@ -41,7 +41,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         params[:task][:groups].select{ |m| m.present? }.map{ |m| m.to_i }.map{ |m| Group.find(m) }.each{ |g| TaskToGroup.create(task: @task, group: g) }
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         params[:task][:groups].select{ |m| m.present? }.map{ |m| m.to_i }.map{ |m| Group.find(m) }.each{ |g| TaskToGroup.create(task: @task, group: g) }
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
