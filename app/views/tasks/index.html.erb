@@ -1,0 +1,104 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing My Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Completed</th>
+      <th>Priority</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= task.completed %></td>
+        <td><%= task.priority %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>Listing Tasks by others</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Completed</th>
+      <th>Priority</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @all_tasks.each do |task| %>
+      <tr>
+        <td><%= task.user %></td>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= task.completed %></td>
+        <td><%= task.priority %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<hr/>
+
+<% @tasks.each do |t| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <% if t.completed? %>
+        <span class="glyphicon glyphicon-ok"></span>
+      <% else %>
+        <span class="glyphicon glyphicon-remove"></span>
+      <% end %>
+      <%= t.name %>
+      <span class="badge">
+      <%= t.priority %>
+      </span>
+    </div>
+    <div class="panel-body">
+    <%= t.description %>
+    </div>
+      <ul class="list-inline" style="margin-left: 10px;">
+      <% unless t.groups.empty? %>
+        <% t.groups.each do |g| %>
+          <li>
+            <%= link_to g, g, class:"btn btn-xs btn-default" %>
+          </li>
+        <% end %>
+      <% end %>
+        <li>
+          <%= link_to '<span class="glyphicon glyphicon-pencil"></span>'.html_safe , edit_task_path(t), class:"btn btn-xs btn-primary" %>
+        </li>
+        <li>
+          <% if t.completed? %>
+          <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe , toggle_completion_task_path(t.id), method: :post, class:"btn btn-xs btn-danger" %>
+          <% else %>
+            <%= link_to '<span class="glyphicon glyphicon-ok"></span>'.html_safe , toggle_completion_task_path(t.id), method: :post, class:"btn btn-xs btn-success" %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to '<span class="glyphicon glyphicon-trash"></span>'.html_safe, t, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-xs btn-default" %>
+        </li>
+      </ul>
+  </div>
+<% end %>
+
+
+
+<%= link_to 'New Task', new_task_path, class:"btn btn-primary" %>

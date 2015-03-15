@@ -1,0 +1,5 @@
+<%# add navigation links to this file %>
+<%#<li><%= render 'layouts/login_form' %><%#</li> %>
+<% if current_user %>
+<li><%= link_to "logout #{current_user}", logout_path, method: :delete %></li>
+<% end %>

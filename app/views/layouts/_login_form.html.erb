@@ -1,0 +1,17 @@
+<% if current_user.nil? %>
+    <%= form_tag session_path, class:"form-inline" do %>
+      <span class="input-group input-group-sm">
+        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+        <!--<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"> -->
+        <%= text_field_tag :username, params[:username], placeholder:"username", class:"form-control" %>
+      </span>
+      <span class="input-group input-group-sm">
+        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+        <%= password_field_tag :password, params[:password], placeholder:"password", class:"form-control" %>
+      </span>
+      <%= submit_tag "Log in", class:'btn btn-primary btn-sm' %>
+      <% end %>
+<% else %>
+  <% link_text = "logout #{current_user}" %>
+  <%= link_to link_text, logout_path, method: :delete %>
+<% end %>
